@@ -10,19 +10,55 @@ Esta solução é uma API RESTful robusta, impulsionada por dados mock, que simu
 - Usuário **Comum** pode enviar para outros Comuns e Lojistas; **Lojista** apenas recebe. :contentReference[oaicite:1]{index=1}
 - Validação de saldo fictício antes da transferência; tudo em memória, com lógica eficaz.
 - Simulação de serviço **autorizador externo**, via mock (consulta GET em endpoint simulado). :contentReference[oaicite:2]{index=2}
-- Notificação fictícia ao recebedor por mock (POST em serviço instável simulado); com retries e tratamento de falhas. :contentReference[oaicite:3]{index=3}
-- API RESTful, sem banco de dados real, apenas mocks, mantendo design limpo e eficiente. :contentReference[oaicite:4]{index=4}
 
-## Arquitetura e Estratégia Mock
+# Desafio Backend PicPay — NestJS com Dados Mock
 
-- **Dados mock**: Usuários e saldos armazenados em estruturas estáticas (arrays, mapas ou objetos em memória), eliminando dependência de DB real.
-- **Mock de autorização**: Simulado via HTTP GET para endpoint fictício, com retries e timeout para robustez.
-- **Mock de notificação**: Simulado via HTTP POST, com lógica de retry e timeout para resiliência visível.
-- Código organizado com clareza empresarial, mantendo futuro-ready extensibilidade.
+### Visão Estratégica & Alta Performance
 
-## Endpoints Principais
+Solução elegante e empresarial construída com **NestJS + TypeScript**, usando **dados mock**, com arquitetura modular e interface profissional direcionada ao futuro da engenharia backend.
 
-### POST `/transfer`
+---
+
+## Índice
+
+- [Visão Geral](#visão-geral)
+- [Tecnologias & Boas Práticas](#tecnologias--boas-práticas)
+- [Organização do Projeto](#organização-do-projeto)
+- [Endpoints e Fluxo Principal](#endpoints-e-fluxo-principal)
+- [Mock de Dados & Simulações](#mock-de-dados--simulações)
+- [Qualidade, Testes e Ferramentas](#qualidade-testes-e-ferramentas)
+- [Execução & Quick-Start](#execução--quick-start)
+- [Motivações Estratégicas](#motivações-estratégicas)
+- [Evoluções Futuristas](#evoluções-futuristas)
+
+---
+
+## Visão Geral
+
+- API RESTful baseada em **NestJS**, com design empresarial e modular.
+- Dados e fluxos simulados por **mock em memória** — rápido, sem complexidade de DB real.
+- Pronto para adoção futura de banco real, microsserviços ou CQRS — tudo alinhado com inovação e crescimento escalável.
+
+---
+
+## Tecnologias & Boas Práticas
+
+- **NestJS**: estrutura robusta, modular e testável (recomendado oficialmente) :contentReference[oaicite:0]{index=0}
+- **Configuração Segura e Hierárquica**: uso de `@nestjs/config`, variáveis tipadas, `Zod` ou soluções similares validando env vars :contentReference[oaicite:1]{index=1}
+- **Documentação via Swagger**: endpoints auto-documentados (`/docs`) com `@nestjs/swagger` :contentReference[oaicite:2]{index=2}
+- **Estrutura Modular Limpa**: cada módulo com `controller.ts`, `service.ts`, DTOs e mocks separados, seguindo DDD e boas práticas :contentReference[oaicite:3]{index=3}
+- **Tratamento Centralizado de Erros**: filtros excepcionais customizados e logs estruturados com `Pino` ou similar :contentReference[oaicite:4]{index=4}
+- **Commit Consciente**: padrão Conventional Commits, linting, hooks com `husky` e `commitlint` :contentReference[oaicite:5]{index=5}
+
+---
+
+Estrutura clara, escalável e de fácil manutenção. :contentReference[oaicite:6]{index=6}
+
+---
+
+## Endpoints e Fluxo Principal
+
+### **POST /transfer**
 
 ```json
 {
